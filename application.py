@@ -150,7 +150,10 @@ def main() -> None:
     print(f"🏷️ Address: {address}")
     print(f"🧱 Block A: {args.block_a} | Block B: {args.block_b}")
     print(f"🗃️ Slots: {', '.join([f'{lbl}' for lbl, _ in slots])}")
-
+ # ✅ New: Print UTC timestamp for when comparison is made
+    from datetime import datetime
+    timestamp = datetime.utcnow().isoformat() + "Z"
+    print(f"🕒 Comparison Timestamp: {timestamp}")
     # Read
     a_vals = read_slots(w3a, address, args.block_a, slots)
     b_vals = read_slots(w3b, address, args.block_b, slots)
