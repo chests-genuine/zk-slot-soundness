@@ -77,13 +77,16 @@ Example (truncated):
 
 🚨 Storage soundness mismatch in 1/2 slot(s).
 
-## Notes
-- You must provide the correct slot indices. For proxies, the EIP-1967 implementation slot is commonly `0x360894A13BA1A3210667C828492DB98DCA3E2076CC3735A920A3CA505D382BBC`.  
-- This tool reads raw storage and does not decode structs; use labels to keep track of what each slot represents.  
-- For stable comparisons, prefer finalized/safe blocks (convert to numeric heights before running).  
-- Some providers may not support very old blocks without archive access.  
-- In Aztec/Zama and similar zk systems, matching critical slots (e.g., roots, implementation pointers, guard params) is essential for proof and bridge soundness.
+- **Timestamp Added:** Each run now prints a UTC timestamp to correlate results with system logs.  
+- **Cross-RPC Caution:** Ensure both RPCs have archive access to avoid missing historical state data.  
+- **Slot Labels:** Use descriptive labels like `owner`, `impl`, or `root` for clarity in comparisons.  
+- **Historical Queries:** When querying older blocks, use archive nodes (Infura/Alchemy Premium).  
+- **Proxy Awareness:** For EIP-1967 proxies, track slot `0x3608...BBC` to ensure implementation consistency.  
+- **JSON Output:** Includes both RPC details, blocks, and timestamp for reproducibility.  
+- **ZK Importance:** Stable state parity between chains ensures deterministic proofs and sound cross-domain messaging.  
+- **Security Use:** Useful for verifying L1 ↔ L2 bridge states, vault integrity, and upgrade correctness.  
+- **Best Practice:** Run daily or per-deployment to catch unauthorized or silent state changes early.  
 
-## Exit codes
-0 → All slots matched between A and B  
-2 → One or more mismatches (or partial read errors)
+**Exit Codes:**  
+  `0` → All slots matched  
+  `2` → At least one mismatch or partial error  
