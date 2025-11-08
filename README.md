@@ -1,4 +1,3 @@
-# README.md
 # zk-slot-soundness
 
 ## Overview
